@@ -2,13 +2,17 @@
 
 namespace App\Providers;
 
+use App\Domain\Content\Models\NavigationItem;
 use App\Domain\Content\Models\Page;
 use App\Domain\Content\Models\Post;
+use App\Domain\Content\Models\Redirect;
 use App\Domain\Content\Models\Service;
 use App\Domain\Content\Models\TeamMember;
 use App\Domain\Content\Models\Testimonial;
+use App\Domain\Content\Policies\NavigationItemPolicy;
 use App\Domain\Content\Policies\PagePolicy;
 use App\Domain\Content\Policies\PostPolicy;
+use App\Domain\Content\Policies\RedirectPolicy;
 use App\Domain\Content\Policies\ServicePolicy;
 use App\Domain\Content\Policies\TeamMemberPolicy;
 use App\Domain\Content\Policies\TestimonialPolicy;
@@ -58,6 +62,8 @@ class AppServiceProvider extends ServiceProvider
         Post::class => PostPolicy::class,
         Testimonial::class => TestimonialPolicy::class,
         TeamMember::class => TeamMemberPolicy::class,
+        NavigationItem::class => NavigationItemPolicy::class,
+        Redirect::class => RedirectPolicy::class,
     ];
 
     /**
