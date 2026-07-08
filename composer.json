@@ -10,6 +10,7 @@
         "bacon/bacon-qr-code": "*",
         "ezyang/htmlpurifier": "*",
         "filament/filament": "^3.3",
+        "filament/spatie-laravel-media-library-plugin": "^3.3",
         "filament/spatie-laravel-settings-plugin": "^3.3",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
