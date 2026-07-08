@@ -14,7 +14,15 @@ class CqcSettings extends Settings
 
     public string $report_url;
 
-    /** @var array<int, array{question: string, rating: string}> */
+    /**
+     * Each item: ['question' => string, 'rating' => string]. No plain @var
+     * generic here — spatie/laravel-settings' cast resolver reads @var at
+     * runtime and can't build a nested cast for a two-level generic array
+     * type. @phpstan-var is a PHPStan-only tag spatie's regex doesn't match,
+     * so this is invisible to it while still satisfying Larastan.
+     *
+     * @phpstan-var array<int, array{question: string, rating: string}>
+     */
     public array $question_ratings;
 
     public static function group(): string

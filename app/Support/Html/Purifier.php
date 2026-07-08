@@ -35,6 +35,7 @@ class Purifier
             'h2', 'h3', 'h4',
             'blockquote',
             'img[src|alt|width|height]',
+            'table', 'thead', 'tbody', 'tr', 'th', 'td',
         ]));
         $config->set('AutoFormat.RemoveEmpty', true);
         $config->set('HTML.TargetBlank', true);

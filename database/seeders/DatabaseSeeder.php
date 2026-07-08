@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PostSeeder::class,
             TestimonialSeeder::class,
             TeamMemberSeeder::class,
+            PageSeeder::class,
             NavigationItemSeeder::class,
         ]);
     }
