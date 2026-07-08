@@ -4,10 +4,10 @@ Companion documents: `docs/reference/Liberty-Centre-Web-Application-Specificatio
 
 ## Local dev environment (this machine)
 
-- Windows host has no PHP/Composer/MySQL. The toolchain lives in **WSL Ubuntu (distro name `Ubuntu`)**: PHP 8.3 (via packages.sury.org — Ubuntu's own repo only ships 8.5), Composer 2, MariaDB 11.8 (running as a systemd service), all installed and working.
-- Project files live on the Windows filesystem at `D:\Liberty` (`/mnt/d/Liberty` from WSL) so VS Code on Windows can open them directly.
-- Run PHP/Composer/artisan/Pest/mysql commands via `wsl -d Ubuntu -- bash -lc "cd /mnt/d/Liberty && <command>"`.
-- Node/npm already present on Windows (v24/npm 11) — run `npm`/Vite from PowerShell directly in `D:\Liberty`, not from WSL.
+- Windows host has no PHP/Composer/MySQL. The toolchain lives in **WSL Ubuntu (distro name `Ubuntu`)**: PHP 8.3 (via packages.sury.org — Ubuntu's own repo only ships 8.5), Composer 2, MariaDB 11.8 (running as a systemd service), Node.js 22/npm (via NodeSource) — all installed and working natively inside WSL.
+- **Project files live on WSL's own native filesystem at `/root/liberty`** — not on the Windows `D:` drive. They started on `D:\Liberty` (Phases 1–3), but every file access from WSL to a Windows-mounted path goes through the 9p bridge, and directory-heavy operations (Composer autoloading, Laravel's service-provider/route discovery, Blade compilation) were taking 30–40+ seconds *per request* — sometimes over 9 minutes — because of it. Moving the working copy onto WSL's native ext4 filesystem dropped a bare `php artisan --version` from ~40s to ~2s and the full Pest suite from ~471s to ~9s. See `docs/decisions.md`.
+- Edit files either via VS Code's **"WSL: Open Folder in WSL..."** remote mode pointed at `/root/liberty`, or via the Windows UNC path `\\wsl.localhost\Ubuntu\root\liberty\...` — both address the same native files, so there's only ever one copy. Don't resurrect a separate `D:\Liberty` working copy; the original is kept only as a pre-migration backup.
+- Run PHP/Composer/artisan/Pest/mysql/npm commands via `wsl -d Ubuntu -- bash -lc "cd /root/liberty && <command>"` — Node now runs natively inside WSL too (no more running npm from Windows against `D:\Liberty`).
 - Local MariaDB: databases `liberty_centre` (dev) and `liberty_centre_testing` (Pest), user `liberty`@`localhost`. Credentials are in the local (gitignored) `.env` / `.env.testing` only — never commit them.
 - Production target has none of this — see hosting constraint below. Local Docker/WSL choices are dev-only conveniences.
 
