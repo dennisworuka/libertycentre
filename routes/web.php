@@ -3,6 +3,7 @@
 use App\Domain\Content\Models\Redirect;
 use App\Http\Controllers\CqcController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,6 +13,10 @@ Route::get('/services', [ServiceController::class, 'index'])->name('services.ind
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 
 Route::get('/cqc-quality', [CqcController::class, 'show'])->name('cqc-quality');
+
+Route::get('/news/feed', [PostController::class, 'feed'])->name('news.feed');
+Route::get('/news', [PostController::class, 'index'])->name('news.index');
+Route::get('/news/{slug}', [PostController::class, 'show'])->name('news.show');
 
 /**
  * Only reached once no other route has matched — i.e. exactly the request

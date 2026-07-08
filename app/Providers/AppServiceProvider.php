@@ -28,6 +28,7 @@ use App\Settings\SocialSeoSettings;
 use App\Support\Csp\Nonce;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
@@ -82,6 +83,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('nonce', function () {
             return "<?php echo 'nonce=\"'.e(app(\App\Support\Csp\Nonce::class)->value()).'\"'; ?>";
         });
+
+        Paginator::useBootstrapFive();
 
         foreach (self::SETTINGS_CLASSES as $settingsClass) {
             Gate::policy($settingsClass, SettingsPolicy::class);
