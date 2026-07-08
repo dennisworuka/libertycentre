@@ -1,0 +1,78 @@
+// Self-hosted fonts (font-display: swap; no CDN)
+@font-face {
+    font-family: "Bricolage Grotesque";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../fonts/bricolage-grotesque-latin-var.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Bricolage Grotesque";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../fonts/bricolage-grotesque-latin-var.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Public Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/public-sans-latin-var.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Public Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../fonts/public-sans-latin-var.woff2") format("woff2");
+}
+
+@import "variables";
+@import "bootstrap/scss/bootstrap";
+
+:root {
+    --lc-primary: #{$primary};
+    --lc-ink: #{$ink};
+    --lc-surface: #{$surface};
+    --lc-mist: #{$mist};
+    --lc-amber: #{$amber};
+}
+
+h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4 {
+    letter-spacing: -0.01em;
+}
+
+.bg-surface {
+    background-color: $surface;
+}
+
+.text-measure {
+    max-width: 68ch;
+}
+
+// Section rhythm per design system: clamp(4rem, 8vw, 6.5rem) block padding
+.lc-section {
+    padding-block: clamp(4rem, 8vw, 6.5rem);
+}
+
+.card {
+    box-shadow: none;
+    transition: box-shadow 0.15s ease-in-out;
+
+    &:hover {
+        box-shadow: $box-shadow;
+    }
+}
+
+// Reduced-motion: app.js toggles this class on <html> and every animated
+// module downgrades to instant when it is present.
+.reduced-motion * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+}
