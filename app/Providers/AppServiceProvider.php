@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Domain\Content\Models\Page;
+use App\Domain\Content\Models\Service;
 use App\Domain\Content\Policies\PagePolicy;
+use App\Domain\Content\Policies\ServicePolicy;
 use App\Policies\SettingsPolicy;
 use App\Settings\AnnouncementSettings;
 use App\Settings\ComplianceSettings;
@@ -46,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected const CONTENT_POLICIES = [
         Page::class => PagePolicy::class,
+        Service::class => ServicePolicy::class,
     ];
 
     /**
