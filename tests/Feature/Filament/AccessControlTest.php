@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Settings\OrganisationSettings;
 use Database\Seeders\RolePermissionSeeder;
 use Filament\Facades\Filament;
 
@@ -14,6 +15,20 @@ it('grants every CMS role access to the admin panel', function (string $role) {
 
     expect($user->canAccessPanel(Filament::getPanel('admin')))->toBeTrue();
 })->with(['super_admin', 'editor', 'recruiter', 'newsletter_manager', 'viewer']);
+
+it('only lets super_admin view or update settings', function (string $role, bool $expected) {
+    $user = User::factory()->create();
+    $user->assignRole($role);
+
+    expect($user->can('viewAny', OrganisationSettings::class))->toBe($expected)
+        ->and($user->can('update', OrganisationSettings::class))->toBe($expected);
+})->with([
+    ['super_admin', true],
+    ['editor', false],
+    ['recruiter', false],
+    ['newsletter_manager', false],
+    ['viewer', false],
+]);
 
 it('only lets super_admin manage CMS user accounts', function (string $role, bool $expected) {
     $user = User::factory()->create();
@@ -65,6 +80,24 @@ it('keeps viewer to read-only content and form permissions', function () {
         ->and($viewer->can('forms.view'))->toBeTrue()
         ->and($viewer->can('pages.manage'))->toBeFalse()
         ->and($viewer->can('forms.manage'))->toBeFalse();
+});
+
+it('blocks a viewer from opening the organisation settings page over HTTP', function () {
+    $viewer = User::factory()->create();
+    $viewer->assignRole('viewer');
+
+    $this->actingAs($viewer)
+        ->get('/admin/organisation-settings-page')
+        ->assertForbidden();
+});
+
+it('lets super_admin open the organisation settings page over HTTP', function () {
+    $superAdmin = User::factory()->create();
+    $superAdmin->assignRole('super_admin');
+
+    $this->actingAs($superAdmin)
+        ->get('/admin/organisation-settings-page')
+        ->assertOk();
 });
 
 it('blocks a non-super-admin from opening the users resource over HTTP', function () {
