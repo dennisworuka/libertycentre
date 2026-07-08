@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Domain\Content\Models\Page;
+use App\Domain\Content\Policies\PagePolicy;
 use App\Policies\SettingsPolicy;
 use App\Settings\AnnouncementSettings;
 use App\Settings\ComplianceSettings;
@@ -38,6 +40,15 @@ class AppServiceProvider extends ServiceProvider
     ];
 
     /**
+     * Content models live in App\Domain\Content\Models, so Laravel's
+     * App\Models\X -> App\Policies\XPolicy auto-discovery can't find their
+     * policies (App\Domain\Content\Policies\XPolicy) either.
+     */
+    protected const CONTENT_POLICIES = [
+        Page::class => PagePolicy::class,
+    ];
+
+    /**
      * Register any application services.
      */
     public function register(): void
@@ -56,6 +67,10 @@ class AppServiceProvider extends ServiceProvider
 
         foreach (self::SETTINGS_CLASSES as $settingsClass) {
             Gate::policy($settingsClass, SettingsPolicy::class);
+        }
+
+        foreach (self::CONTENT_POLICIES as $model => $policy) {
+            Gate::policy($model, $policy);
         }
 
         Event::listen(function (Login $event) {
