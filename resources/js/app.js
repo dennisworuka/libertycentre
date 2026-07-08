@@ -15,6 +15,13 @@ document.documentElement.classList.toggle('reduced-motion', prefersReducedMotion
 window.LC = window.LC || {};
 window.LC.prefersReducedMotion = prefersReducedMotion;
 
+import { initCookieConsent, initConsentGatedEmbeds } from './cookie-consent';
+
+document.addEventListener('DOMContentLoaded', () => {
+    initCookieConsent();
+    initConsentGatedEmbeds();
+});
+
 import './modules/reveal';
 import './modules/navbar';
 import './modules/counters';

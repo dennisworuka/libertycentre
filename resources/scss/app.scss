@@ -76,3 +76,34 @@ h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4 {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
 }
+
+// Header — shrinks and gains a shadow once navbar.js detects scroll.
+.lc-header {
+    transition: box-shadow 0.15s ease-in-out, padding-block 0.15s ease-in-out;
+
+    &.is-scrolled {
+        box-shadow: $box-shadow-sm;
+    }
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+        color: $white;
+        text-decoration: underline;
+    }
+}
+
+// Cookie consent banner
+.lc-cookie-banner {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 1080;
+    background: $white;
+    border-top: 1px solid $mist;
+    box-shadow: 0 -8px 24px rgba(18, 33, 31, 0.1);
+}
