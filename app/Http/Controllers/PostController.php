@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Domain\Content\Models\Post;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -29,9 +30,13 @@ class PostController extends Controller
         ]);
     }
 
-    public function show(string $slug): View
+    public function show(string $slug): View|RedirectResponse
     {
-        $post = Post::published()->where('slug', $slug)->firstOrFail();
+        $post = Post::published()->where('slug', $slug)->first();
+
+        if (! $post) {
+            return $this->redirectOrAbort("/news/{$slug}");
+        }
 
         $related = Post::published()
             ->where('id', '!=', $post->id)

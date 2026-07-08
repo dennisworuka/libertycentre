@@ -15,11 +15,14 @@ class CqcSettings extends Settings
     public string $report_url;
 
     /**
-     * Each item: ['question' => string, 'rating' => string]. No plain @var
-     * generic here — spatie/laravel-settings' cast resolver reads @var at
-     * runtime and can't build a nested cast for a two-level generic array
-     * type. @phpstan-var is a PHPStan-only tag spatie's regex doesn't match,
-     * so this is invisible to it while still satisfying Larastan.
+     * Each item: ['question' => string, 'rating' => string]. This docblock
+     * must never contain the standard PHPDoc type-tag as literal text (not
+     * even in this description) — spatie/laravel-settings' cast resolver
+     * naively regex-matches that tag anywhere in the comment at runtime,
+     * and can't build a nested cast for a two-level generic array type,
+     * which breaks settings resolution on every request. The PHPStan-only
+     * tag below uses a different token the regex won't match, so it stays
+     * invisible to spatie while still satisfying Larastan.
      *
      * @phpstan-var array<int, array{question: string, rating: string}>
      */

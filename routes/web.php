@@ -41,9 +41,13 @@ Route::get('/contact', [PageController::class, 'show'])->name('contact')->defaul
 /**
  * Generic CMS-driven pages: about, our-approach, referrals, newsletter,
  * privacy, cookies, accessibility, terms, safeguarding — every top-level
- * Page record not already matched above. Must stay last among GET routes;
- * Redirect::fallback (registered below) only fires once this also fails to
- * find a matching, published slug.
+ * Page record not already matched above. Must stay last among GET routes.
+ *
+ * This pattern matches on path shape alone, so it intercepts every
+ * single-segment path before Route::fallback ever sees it — including
+ * legacy paths with no matching Page. PageController::show() checks the
+ * Redirect table itself before aborting for exactly that reason; the same
+ * applies to ServiceController/PostController's own {slug} routes above.
  */
 Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show');
 

@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Domain\Content\Models\Page;
 use App\Domain\Content\Models\TeamMember;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class PageController extends Controller
 {
-    public function show(string $slug): View
+    public function show(string $slug): View|RedirectResponse
     {
-        $page = Page::published()->where('slug', $slug)->firstOrFail();
+        $page = Page::published()->where('slug', $slug)->first();
+
+        if (! $page) {
+            return $this->redirectOrAbort("/{$slug}");
+        }
 
         $view = view()->exists("pages.{$page->slug}") ? "pages.{$page->slug}" : 'pages.generic';
 

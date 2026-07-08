@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Domain\Content\Models\Service;
 use App\Domain\Content\Models\Testimonial;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ServiceController extends Controller
 {
@@ -16,9 +17,13 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function show(string $slug): View
+    public function show(string $slug): View|RedirectResponse
     {
-        $service = Service::published()->where('slug', $slug)->firstOrFail();
+        $service = Service::published()->where('slug', $slug)->first();
+
+        if (! $service) {
+            return $this->redirectOrAbort("/services/{$slug}");
+        }
 
         return view('pages.services.show', [
             'title' => $service->meta_title ?: $service->title,
