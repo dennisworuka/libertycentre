@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use App\Support\Csp\Nonce;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +26,14 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::directive('nonce', function () {
             return "<?php echo 'nonce=\"'.e(app(\App\Support\Csp\Nonce::class)->value()).'\"'; ?>";
+        });
+
+        Event::listen(function (Login $event) {
+            activity('auth')->causedBy($event->user->getAuthIdentifier())->withProperties(['ip' => request()->ip()])->log('session started');
+        });
+
+        Event::listen(function (Logout $event) {
+            activity('auth')->causedBy($event->user->getAuthIdentifier())->withProperties(['ip' => request()->ip()])->log('session ended');
         });
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\LogsAdminActivity;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -20,7 +21,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, HasRoles, Notifiable, SoftDeletes;
+    use HasFactory, HasRoles, LogsAdminActivity, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
