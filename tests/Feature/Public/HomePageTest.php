@@ -58,3 +58,18 @@ it('includes organisation JSON-LD structured data on the homepage', function () 
     $response->assertSee('application/ld+json', false);
     $response->assertSee('"@type":"Organization"', false);
 });
+
+it('renders the hero slider with all three slides, one h1 and an accessible pause control', function () {
+    $response = $this->get('/');
+
+    $response->assertOk();
+    $response->assertSee('id="heroSlider"', false);
+    $response->assertSee('Specialist care that starts with the person, not the diagnosis');
+    $response->assertSee('Rated Good by the CQC');
+    $response->assertSee('Join a team that makes a real difference');
+
+    $content = $response->getContent();
+    expect(substr_count($content, '<h1'))->toBe(1);
+    expect($content)->toContain('data-hero-slider-toggle')
+        ->toContain('aria-pressed="false"');
+});

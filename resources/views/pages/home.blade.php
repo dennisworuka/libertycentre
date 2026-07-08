@@ -2,20 +2,30 @@
 
 @section('content')
 
-    {{-- Hero --}}
-    <section class="lc-section pb-3">
-        <div class="container text-center">
-            <h1 class="display-2 mb-3">Specialist care that starts with the person, not the diagnosis</h1>
-            <p class="text-measure mx-auto fs-5 mb-4">
-                {{ $siteOrganisation->strapline }}
-            </p>
-            <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
-                <a href="{{ route('contact') }}" class="btn btn-primary btn-lg">Make an enquiry</a>
-                <a href="{{ route('services.index') }}" class="btn btn-outline-primary btn-lg">Our services</a>
-            </div>
-        </div>
-        <x-care-line variant="hero" />
-    </section>
+    {{-- Hero slider --}}
+    <x-hero-slider :slides="[
+        [
+            'heading' => 'Specialist care that starts with the person, not the diagnosis',
+            'text' => $siteOrganisation->strapline,
+            'cta' => 'Make an enquiry',
+            'url' => route('contact'),
+            'secondaryCta' => 'Our services',
+            'secondaryUrl' => route('services.index'),
+        ],
+        [
+            'heading' => 'Rated Good by the CQC',
+            'text' => 'Independent, regulated care you can trust — read our latest inspection report in full.',
+            'cta' => 'Read the CQC report',
+            'url' => route('cqc-quality'),
+        ],
+        [
+            'heading' => 'Join a team that makes a real difference',
+            'text' => 'We\'re growing our care team across West Yorkshire — training, support and real career progression from day one.',
+            'cta' => 'See current roles',
+            'url' => route('careers'),
+        ],
+    ]" />
+    <x-care-line variant="hero" />
 
     {{-- Trust bar --}}
     <x-section background="surface">

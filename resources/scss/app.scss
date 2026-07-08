@@ -36,6 +36,7 @@
 
 :root {
     --lc-primary: #{$primary};
+    --lc-secondary: #{$secondary};
     --lc-ink: #{$ink};
     --lc-surface: #{$surface};
     --lc-mist: #{$mist};
@@ -123,7 +124,7 @@ h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4 {
     z-index: 1080;
     background: $white;
     border-top: 1px solid $mist;
-    box-shadow: 0 -8px 24px rgba(18, 33, 31, 0.1);
+    box-shadow: 0 -8px 24px rgba($dark, 0.1);
 }
 
 .lc-icon {
@@ -140,6 +141,63 @@ h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4 {
     width: 2rem;
     height: 2rem;
     font-weight: 600;
+}
+
+// Hero slider — Bootstrap's carousel primitives, dressed with the brand
+// gradient (no photography yet) and a text overlay. Slide transitions
+// downgrade to instant via the site-wide .reduced-motion rule above.
+.lc-hero-slide {
+    min-height: clamp(420px, 60vh, 640px);
+    padding-block: clamp(3rem, 6vw, 5rem);
+    background: linear-gradient(135deg, $primary 0%, darken($primary, 18%) 100%);
+}
+
+.lc-hero-slide-text {
+    color: rgba($white, 0.85);
+}
+
+.lc-hero-slider {
+    .carousel-indicators {
+        bottom: 1.25rem;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 4rem;
+        opacity: 0.85;
+
+        &:hover,
+        &:focus-visible {
+            opacity: 1;
+        }
+    }
+}
+
+.lc-hero-slider-toggle {
+    position: absolute;
+    z-index: 2;
+    right: 1rem;
+    bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.35);
+    border: none;
+    border-radius: 50%;
+    color: $white;
+
+    &:hover,
+    &:focus-visible {
+        background: rgba(0, 0, 0, 0.55);
+    }
+}
+
+.lc-icon-sm {
+    width: 1.25rem;
+    height: 1.25rem;
 }
 
 .lc-prose {

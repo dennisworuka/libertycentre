@@ -28,3 +28,4 @@ import './modules/counters';
 import './modules/smooth';
 import './modules/forms';
 import './modules/testimonials';
+import './modules/hero-slider';
