@@ -1,11 +1,10 @@
 <?php
 
 use App\Domain\Content\Models\Redirect;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /**
  * Only reached once no other route has matched — i.e. exactly the request
