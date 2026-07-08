@@ -8,6 +8,7 @@ use App\Http\Controllers\NewsletterSubscribeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -26,6 +27,8 @@ Route::get('/news/{slug}', [PostController::class, 'show'])->name('news.show');
 Route::post('/newsletter/subscribe', NewsletterSubscribeController::class)
     ->middleware('throttle:5,1')
     ->name('newsletter.subscribe');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 /**
  * Contact gets its own named route (linked from all over the site) even

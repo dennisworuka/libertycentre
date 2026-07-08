@@ -97,6 +97,24 @@ h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4 {
     }
 }
 
+// One elegant entrance per section: reveal.js toggles this in, staggering
+// children by 80ms. Collapses to instant under .reduced-motion.
+.lc-reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+
+    &.is-revealed {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.reduced-motion .lc-reveal {
+    opacity: 1;
+    transform: none;
+}
+
 // Cookie consent banner
 .lc-cookie-banner {
     position: fixed;
