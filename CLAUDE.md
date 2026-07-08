@@ -44,23 +44,25 @@ Production is **cPanel shared hosting**: no root, no daemons, no Docker, no Node
 
 ## Design system — "Steady Hands" (corporate, warm, trustworthy)
 
-**Palette (SCSS variables, WCAG-checked):**
-- `$primary: #156864` (Liberty teal — headings, buttons, links)
-- `$ink: #12211F` (near-black text)
-- `$surface: #F6FAF9` (section background alternation)
-- `$mist: #DCEBE8` (borders, card edges, table lines)
-- `$amber: #D9A441` (single accent — used ONLY for the CQC badge, key stats and focus ring outlines; if amber appears more than three times on a page, remove one)
+**Palette (SCSS variables, official Liberty Centre Limited brand colors):**
+- `$primary: #B14040` (brand red — headings, buttons, links)
+- `$secondary: #C46945` (brand orange — used as the single accent: CQC badge, key stats, focus ring outlines, care-line focal point; if it appears more than three times on a page, remove one). Aliased as `$amber` in the design-system role variables for backward-compatible naming.
+- `$success: #78A345` (brand green)
+- `$dark: #2D2D2D` (aliased as `$ink` — headings color)
+- `$light: #FAFAFA` (aliased as `$surface` — section background alternation)
+- `$mist`: computed neutral border tone (`mix($dark, $white, 10%)`) — borders, card edges, table lines
 - `$white: #FFFFFF`
-- Semantic: success `#2E7D32`, danger `#B3261E`, both AA on white.
+- `$body-color: #333333` on `$body-bg: #FFFFFF`
+- Semantic: danger `#B3261E` (unchanged — kept distinct from the brand red).
 
 **Typography (self-hosted, `font-display: swap`):**
 - Display/headings: **Bricolage Grotesque** — warm, characterful, set tight (`letter-spacing: -0.01em`), weights 600/700 only.
 - Body/UI: **Public Sans** — clear, institutional, weights 400/600.
 - Type scale (rem): 3.25 / 2.375 / 1.75 / 1.375 / 1.125 / 1 / 0.875. Line-height 1.15 display, 1.6 body. Max text measure 68ch.
 
-**Signature element — the "care line":** a single continuous 2px SVG curve in `$mist` (amber at one focal point) that flows under the hero headline and reappears as the section divider throughout the site. It is the one memorable device; everything else stays disciplined. Implement once as a Blade component `<x-care-line>` with variants `hero|divider|footer`.
+**Signature element — the "care line":** a single continuous 2px SVG curve in `$mist` (secondary orange at one focal point) that flows under the hero headline and reappears as the section divider throughout the site. It is the one memorable device; everything else stays disciplined. Implement once as a Blade component `<x-care-line>` with variants `hero|divider|footer`.
 
-**Layout:** 12-col Bootstrap grid, `max-width: 1200px` container, 8pt spacing scale, generous whitespace (`section padding-block: clamp(4rem, 8vw, 6.5rem)`), cards with 12px radius, 1px `$mist` border and a soft shadow only on hover. Alternate `$white` / `$surface` sections. Photography treated with a subtle teal duotone overlay for cohesion.
+**Layout:** 12-col Bootstrap grid, `max-width: 1200px` container, 8pt spacing scale, generous whitespace (`section padding-block: clamp(4rem, 8vw, 6.5rem)`), cards with 12px radius, 1px `$mist` border and a soft shadow only on hover. Alternate `$white` / `$surface` sections. Photography treated with a subtle brand-red duotone overlay for cohesion.
 
 **Tone of copy:** plain English, warm and specific ("We support 40+ people across West Yorkshire", not "innovative care solutions"). Buttons say what they do: "Make an enquiry", "See current roles", "Read the CQC report".
 

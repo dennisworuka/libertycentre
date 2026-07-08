@@ -8,13 +8,13 @@
     "src": "resources/fonts/public-sans-latin-var.woff2"
   },
   "resources/js/app.js": {
-    "file": "assets/app-CeX49GlW.js",
+    "file": "assets/app--GGg-qsQ.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-Dg_-YaKq.css",
+    "file": "assets/app-D17AtYQe.css",
     "src": "resources/scss/app.scss",
     "isEntry": true,
     "name": "app",
