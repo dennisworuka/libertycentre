@@ -13,7 +13,7 @@
                 <h1 class="mb-4">Contact</h1>
                 <x-blocks :blocks="$page->body" />
 
-                <div class="border border-mist rounded-3 p-4 bg-surface">
+                <div class="border rounded-3 p-4 bg-surface">
                     <p class="mb-0">
                         The contact form will be enabled shortly. In the meantime, please call or email us using the
                         details opposite.
@@ -27,7 +27,7 @@
             </div>
 
             <div class="col-lg-5">
-                <div class="card border-mist mb-4">
+                <div class="card mb-4">
                     <div class="card-body">
                         <h2 class="h5">Get in touch</h2>
                         <ul class="list-unstyled mb-0">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <div class="lc-map-placeholder border border-mist rounded-3 bg-surface d-flex align-items-center justify-content-center text-center p-5" style="min-height: 240px;">
+                <div class="lc-map-placeholder border rounded-3 bg-surface d-flex align-items-center justify-content-center text-center p-5" style="min-height: 240px;">
                     <div>
                         <p class="mb-2">Map loads only once you consent to non-essential cookies.</p>
                         <button type="button" class="btn btn-outline-primary btn-sm" id="load-map-button" data-requires-consent="analytics">

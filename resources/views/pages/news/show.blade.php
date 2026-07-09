@@ -12,7 +12,7 @@
         <article class="row g-5">
             <div class="col-lg-8">
                 @if ($post->category)
-                    <span class="badge bg-surface text-primary border border-mist mb-3">{{ $post->category }}</span>
+                    <span class="badge bg-surface text-primary border mb-3">{{ $post->category }}</span>
                 @endif
 
                 <h1 class="mb-2">{{ $post->title }}</h1>
@@ -35,7 +35,7 @@
 
                 <x-blocks :blocks="$post->body" />
 
-                <div class="mt-5 pt-4 border-top border-mist">
+                <div class="mt-5 pt-4 border-top">
                     <h2 class="h5">Stay in touch</h2>
                     <p>Get news like this straight to your inbox.</p>
                     <a href="{{ route('pages.show', 'newsletter') }}" class="btn btn-primary">Sign up to our newsletter</a>

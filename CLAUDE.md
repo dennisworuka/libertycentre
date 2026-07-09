@@ -42,27 +42,29 @@ Production is **cPanel shared hosting**: no root, no daemons, no Docker, no Node
 13. **No secrets in the repo.** `.env.example` documents every variable; `APP_DEBUG=false` assumed in all non-local code paths.
 14. Error pages are branded and information-free. Never render stack traces, versions or paths.
 
-## Design system — "Steady Hands" (corporate, warm, trustworthy)
+## Design system — "Steady Hands" (soft, warm, approachable)
 
-**Palette (SCSS variables, official Liberty Centre Limited brand colors):**
-- `$primary: #B14040` (brand red — headings, buttons, links)
-- `$secondary: #C46945` (brand orange — used as the single accent: CQC badge, key stats, focus ring outlines, care-line focal point; if it appears more than three times on a page, remove one). Aliased as `$amber` in the design-system role variables for backward-compatible naming.
-- `$success: #78A345` (brand green)
-- `$dark: #2D2D2D` (aliased as `$ink` — headings color)
-- `$light: #FAFAFA` (aliased as `$surface` — section background alternation)
+Revised 2026-07-09 from an earlier, more corporate direction (stark red primary, tight heading tracking, hover-only shadows) after review feedback that it read as buttoned-up rather than warm. Structural/tone reference: lifeways.co.uk (a comparable UK supported-living provider) — generous whitespace, image-forward cards, credibility stats, soft CTAs. See `docs/decisions.md` for the full rationale and WCAG contrast verification.
+
+**Palette (SCSS variables, Liberty Centre Limited brand colors):**
+- `$primary: #4F7A5C` (muted sage green — headings, buttons, links; ≈4.9:1 contrast against white/`$light` in both directions)
+- `$secondary: #D98756` (warm terracotta — the single accent: CQC badge, key stats, focus ring outlines, care-line focal point; if it appears more than three times on a page, remove one. **Pairs with dark `$ink` text only, not white** — white-on-secondary fails contrast). Aliased as `$amber` in the design-system role variables for backward-compatible naming.
+- `$success: #7FA872` (harmonized with the new sage primary)
+- `$dark: #33302C` (aliased as `$ink` — warm charcoal, headings color)
+- `$light: #FBF8F4` (aliased as `$surface` — warm cream, section background alternation)
 - `$mist`: computed neutral border tone (`mix($dark, $white, 10%)`) — borders, card edges, table lines
 - `$white: #FFFFFF`
 - `$body-color: #333333` on `$body-bg: #FFFFFF`
-- Semantic: danger `#B3261E` (unchanged — kept distinct from the brand red).
+- Semantic: danger `#B3261E` (unchanged — error-state semantics don't move with a brand refresh).
 
 **Typography (self-hosted, `font-display: swap`):**
-- Display/headings: **Bricolage Grotesque** — warm, characterful, set tight (`letter-spacing: -0.01em`), weights 600/700 only.
-- Body/UI: **Public Sans** — clear, institutional, weights 400/600.
-- Type scale (rem): 3.25 / 2.375 / 1.75 / 1.375 / 1.125 / 1 / 0.875. Line-height 1.15 display, 1.6 body. Max text measure 68ch.
+- Display/headings: **Bricolage Grotesque** — warm, characterful, default tracking (no artificial tightening), weight 600 by default; 700 reserved for `h1`/`.display-1`/`.display-2` only (hero scale), everything smaller stays at 600 for a softer feel.
+- Body/UI: **Public Sans** — clear, friendly, weights 400/600.
+- Type scale (rem): 3.25 / 2.375 / 1.75 / 1.375 / 1.125 / 1 / 0.875. Line-height 1.2 display, 1.6 body. Max text measure 68ch.
 
-**Signature element — the "care line":** a single continuous 2px SVG curve in `$mist` (secondary orange at one focal point) that flows under the hero headline and reappears as the section divider throughout the site. It is the one memorable device; everything else stays disciplined. Implement once as a Blade component `<x-care-line>` with variants `hero|divider|footer`.
+**Signature element — the "care line":** a single continuous 2px SVG curve in `$mist` (secondary terracotta at one focal point) that flows under the hero headline and reappears as the section divider throughout the site. It is the one memorable device; everything else stays disciplined. Implement once as a Blade component `<x-care-line>` with variants `hero|divider|footer`.
 
-**Layout:** 12-col Bootstrap grid, `max-width: 1200px` container, 8pt spacing scale, generous whitespace (`section padding-block: clamp(4rem, 8vw, 6.5rem)`), cards with 12px radius, 1px `$mist` border and a soft shadow only on hover. Alternate `$white` / `$surface` sections. Photography treated with a subtle brand-red duotone overlay for cohesion.
+**Layout:** 12-col Bootstrap grid, `max-width: 1200px` container, generous whitespace (`section padding-block: clamp(4.5rem, 9vw, 7.5rem)`), cards with 20px radius, 1px `$mist` border and a soft ambient shadow at rest that grows slightly on hover (not hover-only — flat-until-interaction reads corporate). Buttons are fully pill-shaped (`$btn-border-radius: 50rem`). Alternate `$white` / `$surface` sections. Photography is shown as uploaded, with no color/duotone overlay — that was an earlier design-doc intention this revision explicitly drops.
 
 **Tone of copy:** plain English, warm and specific ("We support 40+ people across West Yorkshire", not "innovative care solutions"). Buttons say what they do: "Make an enquiry", "See current roles", "Read the CQC report".
 

@@ -24,7 +24,7 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="card border-mist">
+                <div class="card">
                     <div class="card-body text-center">
                         <h2 class="h5">Interested in {{ $service->title }}?</h2>
                         <p>Tell us a little about the support being sought and we'll get back to you within one working day.</p>

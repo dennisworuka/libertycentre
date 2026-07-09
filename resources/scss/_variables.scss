@@ -3,12 +3,13 @@
 // See CLAUDE.md "Design system" for the source of truth — do not hard-code
 // these values anywhere else; import this partial instead.
 
-// Palette — official Liberty Centre Limited brand colors.
-$primary: #B14040;
-$secondary: #C46945;
-$success: #78A345;
-$light: #FAFAFA;
-$dark: #2D2D2D;
+// Palette — Liberty Centre Limited brand colors ("soft & approachable"
+// direction, revised from the original stark red/orange scheme).
+$primary: #4F7A5C;
+$secondary: #D98756;
+$success: #7FA872;
+$light: #FBF8F4;
+$dark: #33302C;
 $white: #FFFFFF;
 $danger: #B3261E;
 
@@ -35,8 +36,8 @@ $font-family-sans-serif: "Public Sans", system-ui, -apple-system, sans-serif;
 $font-family-base: $font-family-sans-serif;
 
 $headings-font-family: $font-family-display;
-$headings-font-weight: 700;
-$headings-line-height: 1.15;
+$headings-font-weight: 600;
+$headings-line-height: 1.2;
 $headings-color: $ink;
 
 $body-color: #333333;
@@ -51,11 +52,14 @@ $h4-font-size: 1.375rem;
 $h5-font-size: 1.125rem;
 $h6-font-size: 1rem;
 
-// Borders / radius (12px cards, 1px mist borders)
-$border-radius: 0.75rem;
-$border-radius-sm: 0.5rem;
-$border-radius-lg: 1rem;
+// Borders / radius — soft/rounded direction (20px cards, pill buttons, 1px mist borders)
+$border-radius: 1.25rem;
+$border-radius-sm: 0.75rem;
+$border-radius-lg: 1.75rem;
 $border-color: $mist;
+$btn-border-radius: 50rem;
+$btn-border-radius-sm: 50rem;
+$btn-border-radius-lg: 50rem;
 
 // Grid — max-width 1200px container
 $container-max-widths: (
@@ -79,8 +83,10 @@ $link-decoration: none;
 $card-border-radius: $border-radius;
 $card-border-color: $mist;
 
-// Shadows — soft, hover-only per design system (applied via utility class, not globally)
+// Shadows — soft ambient elevation at rest, slightly more on hover (applied
+// via the .card override in app.scss, not Bootstrap's own shadow utilities).
 $box-shadow-sm: 0 1px 2px rgba($dark, 0.06);
+$card-shadow-resting: 0 4px 16px rgba($dark, 0.06);
 $box-shadow: 0 12px 32px rgba($dark, 0.1);
 
 $enable-rounded: true;

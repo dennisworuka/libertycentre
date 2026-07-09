@@ -3,7 +3,7 @@
 <div class="card h-100 position-relative">
     <div class="card-body d-flex flex-column">
         @if ($post->category)
-            <span class="badge bg-surface text-primary border border-mist mb-2 align-self-start">{{ $post->category }}</span>
+            <span class="badge bg-surface text-primary border mb-2 align-self-start">{{ $post->category }}</span>
         @endif
 
         <h3 class="h5">

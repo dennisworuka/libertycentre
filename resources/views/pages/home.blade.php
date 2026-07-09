@@ -54,7 +54,7 @@
             <h2>How we can help</h2>
             <p class="text-measure mx-auto">Five specialist services, one consistent standard of care.</p>
         </div>
-        <div class="row g-4" data-reveal-stagger>
+        <div class="row g-5" data-reveal-stagger>
             @foreach ($services as $service)
                 <div class="col-md-6 col-lg-4">
                     <x-card.service :service="$service" />
@@ -102,7 +102,7 @@
                 <h2 class="mb-0">Latest news</h2>
                 <a href="{{ route('news.index') }}" class="btn btn-outline-primary">All news</a>
             </div>
-            <div class="row g-4" data-reveal-stagger>
+            <div class="row g-5" data-reveal-stagger>
                 @foreach ($posts as $post)
                     <div class="col-md-4">
                         <x-card.post :post="$post" />

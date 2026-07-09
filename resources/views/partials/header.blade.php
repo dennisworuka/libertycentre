@@ -1,4 +1,4 @@
-<header class="lc-header sticky-top bg-white border-bottom border-mist" id="site-header">
+<header class="lc-header sticky-top bg-white border-bottom" id="site-header">
     <nav class="navbar navbar-expand-lg container py-3" aria-label="Primary">
         <a class="navbar-brand fw-bold text-primary" href="{{ route('home') }}">
             {{ $siteOrganisation->site_name }}

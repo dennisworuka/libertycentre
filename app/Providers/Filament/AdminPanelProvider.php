@@ -31,10 +31,10 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Liberty Centre')
             ->darkMode(false)
             ->colors([
-                'primary' => Color::hex('#B14040'),
+                'primary' => Color::hex('#4F7A5C'),
                 'danger' => Color::hex('#B3261E'),
-                'success' => Color::hex('#78A345'),
-                'warning' => Color::hex('#C46945'),
+                'success' => Color::hex('#7FA872'),
+                'warning' => Color::hex('#D98756'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

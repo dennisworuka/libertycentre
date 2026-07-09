@@ -13,7 +13,7 @@
             <p class="text-measure mx-auto">Five specialist services, each built around the person receiving support.</p>
         </div>
 
-        <div class="row g-4" data-reveal-stagger>
+        <div class="row g-5" data-reveal-stagger>
             @foreach ($services as $service)
                 <div class="col-md-6 col-lg-4">
                     <x-card.service :service="$service" />

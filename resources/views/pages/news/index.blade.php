@@ -33,7 +33,7 @@
         @if ($posts->isEmpty())
             <p>There are no articles in this category yet.</p>
         @else
-            <div class="row g-4" data-reveal-stagger>
+            <div class="row g-5" data-reveal-stagger>
                 @foreach ($posts as $post)
                     <div class="col-md-4">
                         <x-card.post :post="$post" />

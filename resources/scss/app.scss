@@ -43,8 +43,10 @@
     --lc-amber: #{$amber};
 }
 
-h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4 {
-    letter-spacing: -0.01em;
+// Hero-scale headings stay at the heavier weight; everything smaller uses
+// the softer $headings-font-weight (600) set in _variables.scss.
+h1, .display-1, .display-2 {
+    font-weight: 700;
 }
 
 .bg-surface {
@@ -55,13 +57,13 @@ h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4 {
     max-width: 68ch;
 }
 
-// Section rhythm per design system: clamp(4rem, 8vw, 6.5rem) block padding
+// Section rhythm per design system: generous, airy block padding
 .lc-section {
-    padding-block: clamp(4rem, 8vw, 6.5rem);
+    padding-block: clamp(4.5rem, 9vw, 7.5rem);
 }
 
 .card {
-    box-shadow: none;
+    box-shadow: $card-shadow-resting;
     transition: box-shadow 0.15s ease-in-out;
 
     &:hover {
