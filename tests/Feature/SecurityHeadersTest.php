@@ -32,3 +32,11 @@ it('includes a nonce in the script-src and style-src directives', function () {
     expect($csp)->toMatch("/script-src 'self' 'nonce-[A-Za-z0-9+\/=]+'/")
         ->toMatch("/style-src 'self' 'nonce-[A-Za-z0-9+\/=]+'/");
 });
+
+it('only grants unsafe-eval to the admin panel, never the public site', function () {
+    $publicCsp = $this->get('/')->headers->get('Content-Security-Policy');
+    $adminCsp = $this->get('/admin/login')->headers->get('Content-Security-Policy');
+
+    expect($publicCsp)->not->toContain('unsafe-eval')
+        ->and($adminCsp)->toContain("'unsafe-eval'");
+});
