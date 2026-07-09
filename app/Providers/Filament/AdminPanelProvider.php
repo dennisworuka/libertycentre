@@ -29,11 +29,12 @@ class AdminPanelProvider extends PanelProvider
             ->path(config('admin.path'))
             ->login(Login::class)
             ->brandName('Liberty Centre')
+            ->darkMode(false)
             ->colors([
-                'primary' => Color::hex('#156864'),
+                'primary' => Color::hex('#B14040'),
                 'danger' => Color::hex('#B3261E'),
-                'success' => Color::hex('#2E7D32'),
-                'warning' => Color::hex('#D9A441'),
+                'success' => Color::hex('#78A345'),
+                'warning' => Color::hex('#C46945'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
