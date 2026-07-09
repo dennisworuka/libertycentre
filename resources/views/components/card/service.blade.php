@@ -1,6 +1,17 @@
 @props(['service'])
 
-<div {{ $attributes->class(['card h-100 position-relative']) }}>
+@php
+    $cardImageUrl = $service->getFirstMediaUrl(\App\Domain\Content\Models\Service::CARD_IMAGE_COLLECTION, '480');
+    $cardImageAlt = $service->getFirstMedia(\App\Domain\Content\Models\Service::CARD_IMAGE_COLLECTION)?->getCustomProperty('alt');
+@endphp
+
+<div {{ $attributes->class(['card h-100 position-relative overflow-hidden']) }}>
+    @if ($cardImageUrl)
+        <div class="lc-card-image-wrap">
+            <img src="{{ $cardImageUrl }}" alt="{{ $cardImageAlt }}" class="lc-card-image" loading="lazy">
+        </div>
+    @endif
+
     <div class="card-body d-flex flex-column">
         @if ($service->icon)
             <div class="lc-card-icon mb-3 text-primary">

@@ -10,14 +10,19 @@ use App\Domain\Content\Concerns\Publishable;
 use App\Domain\Content\Enums\PublishStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * @property PublishStatus $status
  * @property array<int, array<string, mixed>> $body
  */
-class Service extends Model
+class Service extends Model implements HasMedia
 {
-    use HasPurifiedBlocks, HasRevisions, HasSlug, LogsAdminActivity, Publishable;
+    use HasPurifiedBlocks, HasRevisions, HasSlug, InteractsWithMedia, LogsAdminActivity, Publishable;
+
+    public const CARD_IMAGE_COLLECTION = 'card_image';
 
     protected $fillable = [
         'title',
@@ -57,5 +62,26 @@ class Service extends Model
     public function publicPath(string $slug): string
     {
         return "/services/{$slug}";
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection(self::CARD_IMAGE_COLLECTION)
+            ->singleFile()
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp']);
+    }
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('480')->nonQueued()->width(480)->format('webp');
+        $this->addMediaConversion('960')->nonQueued()->width(960)->format('webp');
+        $this->addMediaConversion('1440')->nonQueued()->width(1440)->format('webp');
+    }
+
+    public function cardImageHasAltText(): bool
+    {
+        $media = $this->getFirstMedia(self::CARD_IMAGE_COLLECTION);
+
+        return $media && filled($media->getCustomProperty('alt'));
     }
 }

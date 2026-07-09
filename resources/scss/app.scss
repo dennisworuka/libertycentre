@@ -137,6 +137,29 @@ h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4 {
     height: 2rem;
 }
 
+// Photography treated with a subtle brand-red duotone overlay per the
+// design system — a light multiply wash rather than a full SVG duotone
+// filter, kept deliberately gentle so it reads as "cohesive," not tinted.
+.lc-card-image-wrap {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(160deg, rgba($primary, 0.5), rgba($primary, 0.12));
+        mix-blend-mode: multiply;
+    }
+}
+
+.lc-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .lc-step-number {
     width: 2rem;
     height: 2rem;

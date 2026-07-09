@@ -3,6 +3,7 @@
 use App\Domain\Content\Enums\PublishStatus;
 use App\Domain\Content\Models\Service;
 use App\Domain\Content\Models\Testimonial;
+use Illuminate\Http\UploadedFile;
 
 it('lists only published services on the services index', function () {
     Service::create([
@@ -27,6 +28,38 @@ it('lists only published services on the services index', function () {
     $response->assertOk();
     $response->assertSee('Autism Support');
     $response->assertDontSee('Draft Service');
+});
+
+it('renders the service card image with its alt text when one is attached, and falls back gracefully without one', function () {
+    $withImage = Service::create([
+        'title' => 'Autism Support',
+        'summary' => 'One-to-one support.',
+        'body' => [],
+        'order' => 0,
+        'status' => PublishStatus::Published,
+        'published_at' => now(),
+    ]);
+
+    $withImage->addMedia(UploadedFile::fake()->image('card.jpg'))
+        ->toMediaCollection(Service::CARD_IMAGE_COLLECTION);
+    $withImage->getFirstMedia(Service::CARD_IMAGE_COLLECTION)
+        ->setCustomProperty('alt', 'A support worker and a young person planting seedlings together')
+        ->save();
+
+    Service::create([
+        'title' => 'Supported Living',
+        'summary' => 'Your own front door.',
+        'body' => [],
+        'order' => 1,
+        'status' => PublishStatus::Published,
+        'published_at' => now(),
+    ]);
+
+    $response = $this->get('/services');
+
+    $response->assertOk();
+    $response->assertSee('lc-card-image', false);
+    $response->assertSee('A support worker and a young person planting seedlings together', false);
 });
 
 it('renders a published service detail page with its testimonials', function () {

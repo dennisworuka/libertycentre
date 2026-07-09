@@ -9,9 +9,11 @@ use App\Filament\Support\ContentBlocks;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -58,6 +60,23 @@ class ServiceResource extends Resource
                 ]),
 
             Textarea::make('summary')->required()->maxLength(500)->columnSpanFull(),
+
+            Section::make('Card image')
+                ->columns(2)
+                ->schema([
+                    SpatieMediaLibraryFileUpload::make('card_image')
+                        ->collection(Service::CARD_IMAGE_COLLECTION)
+                        ->image()
+                        ->columnSpanFull(),
+
+                    TextInput::make('card_image_alt')
+                        ->label('Alt text')
+                        ->helperText('Required before this service can be published.')
+                        ->required(fn (Get $get): bool => $get('status') === PublishStatus::Published->value)
+                        ->afterStateHydrated(function (TextInput $component, ?Service $record) {
+                            $component->state($record?->getFirstMedia(Service::CARD_IMAGE_COLLECTION)?->getCustomProperty('alt'));
+                        }),
+                ]),
 
             Section::make('SEO')
                 ->columns(2)
