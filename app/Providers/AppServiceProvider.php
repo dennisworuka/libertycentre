@@ -32,6 +32,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -83,6 +84,13 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('nonce', function () {
             return "<?php echo 'nonce=\"'.e(app(\App\Support\Csp\Nonce::class)->value()).'\"'; ?>";
         });
+
+        // Livewire's own script/style tags (including Filament's, since
+        // Filament is built on Livewire) fall back to Vite::cspNonce() when
+        // no explicit nonce is passed to @livewireScripts/@livewireStyles.
+        // Wiring it here — before any view renders — makes them match the
+        // same nonce SecurityHeaders puts in the CSP header.
+        Vite::useCspNonce(app(Nonce::class)->value());
 
         Paginator::useBootstrapFive();
 
