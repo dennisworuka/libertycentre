@@ -2,6 +2,8 @@
 
 Corporate website and CMS for a CQC-registered specialist care provider, built for cPanel shared hosting.
 
+Liberty Centre supports people with special needs through specialist, person-centred care services.
+
 ## Stack
 
 - Laravel 12, PHP 8.3
