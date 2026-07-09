@@ -17,9 +17,9 @@
                     @forelse ($footerMenu as $item)
                         <li><a href="{{ $item->type === 'internal' ? url($item->page_slug ?? '/') : $item->url }}">{{ $item->label }}</a></li>
                     @empty
-                        <li><a href="{{ url('/privacy') }}">Privacy Policy</a></li>
-                        <li><a href="{{ url('/cookies') }}">Cookie Policy</a></li>
-                        <li><a href="{{ url('/accessibility') }}">Accessibility Statement</a></li>
+                        <li><a href="{{ url('/privacy-policy') }}">Privacy Policy</a></li>
+                        <li><a href="{{ url('/cookie-policy') }}">Cookie Policy</a></li>
+                        <li><a href="{{ url('/accessibility-statement') }}">Accessibility Statement</a></li>
                     @endforelse
                 </ul>
             </div>

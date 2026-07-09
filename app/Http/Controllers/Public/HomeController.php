@@ -3,32 +3,30 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Public\Concerns\LoadsPublicLayoutData;
 use App\Models\Event;
 use App\Models\HomepageSection;
 use App\Models\HomepageSlide;
-use App\Models\MenuItem;
 use App\Models\Post;
-use App\Models\SiteSetting;
 use App\Models\Testimonial;
 use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
 {
+    use LoadsPublicLayoutData;
+
     public function __invoke(): View
     {
         HomepageSection::ensureDefaults();
 
-        return view('public.home', [
-            'settings' => SiteSetting::current(),
-            'headerMenu' => MenuItem::query()->where('menu', 'header')->where('is_active', true)->orderBy('sort_order')->get(),
-            'footerMenu' => MenuItem::query()->where('menu', 'footer')->where('is_active', true)->orderBy('sort_order')->get(),
+        return view('public.home', $this->publicLayoutData([
             'sections' => HomepageSection::query()->where('is_enabled', true)->orderBy('sort_order')->pluck('key')->all(),
             'slides' => $this->slides(),
             'serviceCards' => $this->serviceCards(),
             'testimonials' => Testimonial::query()->where('is_published', true)->where('consent_confirmed', true)->orderBy('sort_order')->limit(6)->get(),
             'posts' => Post::query()->where('status', 'published')->latest('published_at')->limit(3)->get(),
             'events' => Event::query()->where('is_published', true)->where('starts_at', '>=', now())->orderBy('starts_at')->limit(2)->get(),
-        ]);
+        ]));
     }
 
     private function slides()

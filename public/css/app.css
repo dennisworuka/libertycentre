@@ -307,3 +307,57 @@ a:hover {
         scroll-behavior: auto;
     }
 }
+
+.content-measure {
+    max-width: 70ch;
+}
+
+.content-block + .content-block,
+.cta-panel,
+.easy-read-card,
+.download-row {
+    margin-top: 2rem;
+}
+
+.faq-item {
+    background: var(--lc-white);
+    border: 1px solid rgba(33, 37, 41, 0.16);
+    border-radius: var(--lc-radius);
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+}
+
+.faq-item summary {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    font-weight: 800;
+    min-height: 44px;
+}
+
+.cta-panel,
+.team-card,
+.easy-read-card,
+.download-row {
+    background: var(--lc-white);
+    border-radius: var(--lc-radius);
+    box-shadow: var(--lc-shadow);
+    padding: 1.5rem;
+}
+
+.team-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.status-pill,
+.review-date {
+    color: var(--lc-secondary-text);
+    display: inline-block;
+    font-weight: 800;
+}
+
+.easy-read-page {
+    font-size: 1.15rem;
+}
