@@ -17,6 +17,8 @@ final class Permissions
         'settings.manage' => ['Super Admin', 'Admin'],
         'media.manage' => ['Super Admin', 'Admin', 'Content Editor'],
         'menus.manage' => ['Super Admin', 'Admin', 'Content Editor'],
+        'pages.manage' => ['Super Admin', 'Admin', 'Content Editor'],
+        'homepage.manage' => ['Super Admin', 'Admin', 'Content Editor'],
         'audit.view' => ['Super Admin', 'Admin'],
         'dashboard.view' => ['Super Admin', 'Admin', 'Content Editor', 'HR / Recruitment', 'Care Manager'],
     ];

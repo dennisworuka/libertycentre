@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\MediaAsset;
 use App\Models\MenuItem;
+use App\Models\HomepageSection;
+use App\Models\Page;
 use App\Models\SiteSetting;
 use App\Models\User;
 use App\Services\Auth\LoginThrottle;
@@ -32,6 +34,8 @@ class PhaseOneAdminFoundationTest extends TestCase
             'settings.manage' => SiteSetting::class,
             'media.manage' => MediaAsset::class,
             'menus.manage' => MenuItem::class,
+            'pages.manage' => Page::class,
+            'homepage.manage' => HomepageSection::class,
             'audit.view' => Activity::class,
         ];
 

@@ -50,7 +50,7 @@ class SiteSetting extends Model
 
             Validator::make($branding, [
                 'primary' => ['nullable', new AccessibleContrast($branding['on_primary'] ?? '#FFFFFF')],
-                'secondary_text' => ['nullable', new AccessibleContrast($branding['background'] ?? '#FFFFFF')],
+                'secondary_text' => ['nullable', new AccessibleContrast($branding['background'] ?? '#FFFFFF', 4.0)],
             ])->validate();
         });
     }

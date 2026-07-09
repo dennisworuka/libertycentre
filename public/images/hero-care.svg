@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Support worker and service user planning independent living goals">
+<rect width="1600" height="900" fill="#F8F6F3"/>
+<rect x="0" y="0" width="1600" height="900" fill="#B14040" opacity=".22"/>
+<circle cx="1180" cy="320" r="220" fill="#77A244" opacity=".35"/>
+<rect x="210" y="260" width="760" height="380" rx="48" fill="#FFFFFF"/>
+<path d="M320 560h520M320 480h420M320 400h500" stroke="#B14040" stroke-width="34" stroke-linecap="round"/>
+<circle cx="1120" cy="560" r="92" fill="#C36844"/>
+<circle cx="1260" cy="560" r="92" fill="#5E8230"/>
+</svg>

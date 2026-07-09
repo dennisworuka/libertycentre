@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? config('app.name', 'Liberty Centre Limited') }}</title>
+    <title>{{ $title ?? 'Liberty Centre Limited' }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
@@ -15,37 +15,18 @@
     <a class="skip-link" href="#main-content">Skip to content</a>
 
     <div class="site-shell d-flex flex-column">
-        <header class="site-header border-bottom">
-            <nav class="navbar navbar-expand-lg" aria-label="Primary navigation">
-                <div class="container py-2">
-                    <a class="navbar-brand text-wrap" href="{{ url('/') }}">Liberty Centre Limited</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#primary-navigation" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="primary-navigation">
-                        <ul class="navbar-nav ms-auto gap-lg-2">
-                            <li class="nav-item"><a class="nav-link" href="#main-content">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/admin') }}">Admin</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
+        @include('partials.header', ['settings' => $settings ?? null, 'headerMenu' => $headerMenu ?? collect()])
 
         <main id="main-content" class="flex-grow-1">
             @yield('content')
         </main>
 
-        <footer class="site-footer border-top mt-auto">
-            <div class="container py-4">
-                <p class="mb-1 fw-semibold">Liberty Centre Limited</p>
-                <p class="mb-0 text-secondary">Footer, compliance links, CQC details, contact information, and newsletter signup will be CMS-managed in later phases.</p>
-            </div>
-        </footer>
+        @include('partials.footer', ['settings' => $settings ?? null, 'footerMenu' => $footerMenu ?? collect()])
     </div>
 
     @include('partials.cookie-consent')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/homepage.js') }}" defer></script>
 </body>
 </html>
