@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Auth\Login;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -26,15 +25,22 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path(config('admin.path'))
-            ->login(Login::class)
-            ->brandName('Liberty Centre')
-            ->darkMode(false)
+            ->path('admin')
+            ->login()
             ->colors([
-                'primary' => Color::hex('#4F7A5C'),
-                'danger' => Color::hex('#B3261E'),
-                'success' => Color::hex('#7FA872'),
-                'warning' => Color::hex('#D98756'),
+                'primary' => [
+                    50 => '250, 242, 242',
+                    100 => '244, 225, 225',
+                    200 => '232, 193, 193',
+                    300 => '215, 148, 148',
+                    400 => '196, 94, 94',
+                    500 => '177, 64, 64',
+                    600 => '174, 57, 57',
+                    700 => '137, 45, 45',
+                    800 => '104, 38, 38',
+                    900 => '80, 33, 33',
+                    950 => '43, 14, 14',
+                ],
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

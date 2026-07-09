@@ -1,59 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Liberty Centre Limited
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Corporate website and CMS for a CQC-registered specialist care provider, built for cPanel shared hosting.
 
-## About Laravel
+## Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Laravel 12, PHP 8.3
+- Filament 3 admin panel at `/admin`
+- Blade templates with Bootstrap 5.3 and committed public CSS
+- MySQL 8 / MariaDB-compatible production database
+- Database queue processed by cron with `queue:work --stop-when-empty`
+- Scheduler via cron every minute
+- SMTP mail, configurable per environment
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Hosting Model
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The application code is intended to live above the web root. Only `public/` should be web-accessible. Redis and persistent queue workers are not required; shared-hosting cron drives scheduled tasks and queue draining.
 
-## Learning Laravel
+## Local Tooling
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+This workspace includes a portable PHP and Composer toolchain under `.tools/` for local development on this machine. It is ignored by Git.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```powershell
+.\.tools\php\php.exe artisan serve
+.\.tools\php\php.exe artisan test
+.\.tools\php\php.exe .\.tools\composer.phar install
+```
 
-## Laravel Sponsors
+## Phases
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Prompt 0: Project Setup & Standards
 
-### Premium Partners
+Fresh Laravel 12 scaffold, Filament 3 at `/admin`, hosting-aware environment defaults, brand CSS, base layout, cookie-consent stub, and phase folders.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Phase 1: Foundation
 
-## Contributing
+Auth, MFA, roles, site settings, media library, menus, audit log, and dashboard.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Phase 2: Pages & Homepage
 
-## Code of Conduct
+Flexible page system, homepage slider, full homepage, header/footer, and design system.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Phase 3: Core Content
 
-## Security Vulnerabilities
+Services, about/team, compliance pages, FAQs, downloads, easy read, and branded error pages.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Phase 4: Referrals & Enquiries
 
-## License
+Secure referral and enquiry forms, submission management, private document downloads, notifications, and retention.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Phase 5: Recruitment
+
+Careers, vacancies, applications, CV management, pipeline, and GDPR tooling.
+
+### Phase 6: Publishing
+
+News, events, gallery, testimonials, case studies, and homepage pull-throughs.
+
+### Phase 7: Newsletter
+
+Double opt-in subscriptions, campaign builder, chunked sending, unsubscribe, bounce handling, and reporting.
+
+### Phase 8: SEO, Performance & Accessibility
+
+Structured data, sitemap, robots, redirects, performance tuning, and accessibility audit automation.
+
+### Phase 9: Launch Hardening & Handover
+
+Security headers, cookie consent, backups, full testing, deployment runbook, and handover pack.

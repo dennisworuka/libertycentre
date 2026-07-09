@@ -6,32 +6,18 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
-        "bacon/bacon-qr-code": "*",
-        "ezyang/htmlpurifier": "*",
+        "php": "^8.3",
         "filament/filament": "^3.3",
-        "filament/spatie-laravel-media-library-plugin": "^3.3",
-        "filament/spatie-laravel-settings-plugin": "^3.3",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1",
-        "pragmarx/google2fa-laravel": "*",
-        "spatie/laravel-activitylog": "*",
-        "spatie/laravel-backup": "*",
-        "spatie/laravel-honeypot": "*",
-        "spatie/laravel-medialibrary": "*",
-        "spatie/laravel-permission": "*",
-        "spatie/laravel-settings": "*"
+        "laravel/tinker": "^2.10.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
-        "larastan/larastan": "^3.0",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.24",
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "pestphp/pest": "^3.7",
-        "pestphp/pest-plugin-laravel": "^3.1",
         "phpunit/phpunit": "^11.5.50"
     },
     "autoload": {
@@ -57,7 +43,7 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
+            "npx concurrently -c \"#b14040,#77a244,#c36844\" \"php artisan serve\" \"php artisan queue:work --stop-when-empty\" \"php artisan pail --timeout=0\" --names=server,queue,logs --kill-others"
         ],
         "test": [
             "@php artisan config:clear --ansi",
@@ -95,8 +81,7 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
-        },
-        "process-timeout": 1200
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true

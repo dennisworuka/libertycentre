@@ -13,14 +13,17 @@
 /.zed
 /auth.json
 /node_modules
-/.claude
-# public/build is intentionally NOT ignored: compiled assets are committed
-# for cPanel deployment, since production has no Node runtime (CLAUDE.md).
+/public/build
 /public/hot
 /public/storage
 /storage/*.key
 /storage/pail
 /vendor
+/.tools
+/.fresh
+/.tmp.drivedownload
+/.tmp.driveupload
+database/database.sqlite
 Homestead.json
 Homestead.yaml
 Thumbs.db
